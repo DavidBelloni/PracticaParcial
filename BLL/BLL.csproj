@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IGenericServices.cs" />
-    <Compile Include="Interface\IOperacionesServices.cs" />
-    <Compile Include="Services\OperacionesServices.cs" />
+    <Compile Include="Interface\IClienteService.cs" />
+    <Compile Include="Interface\ICuentaService.cs" />
+    <Compile Include="Interface\IOperacionService.cs" />
+    <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\CuentaService.cs" />
+    <Compile Include="Services\OperacionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

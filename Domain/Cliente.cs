@@ -8,6 +8,9 @@ namespace Domain
 {
     public class Cliente
     {
+        public Guid IdCliente { get; set; }
+        public string Nombre { get; set; }
+        public List<Cuenta> Cuentas { get; set; } = new List<Cuenta>();
 
     }
 }

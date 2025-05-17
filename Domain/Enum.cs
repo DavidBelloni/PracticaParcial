@@ -8,17 +8,17 @@ namespace Domain
 {
     public class Enum
     {
-        public enum TipoMovimiento
+        public enum TipoOperacion
         {
             Transferencia,
             Deposito,
-            Retiro
+            Conversion
         }
         public enum TipoCuenta
         {
-            BTC,
-            ETH,
-            USDT
+            CA,
+            BTC
+
         }
     }
 }

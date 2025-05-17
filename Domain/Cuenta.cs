@@ -10,10 +10,20 @@ namespace Domain
     public abstract class Cuenta
 
     {
-        public Guid idCuenta { get; set; }
-        public decimal saldo { get; set; }
-        public DateTime fechaCreacion { get; set; }
-        public TipoCuenta tipoCuenta { get; set; } 
+        public Guid IdCuenta { get; set; }
+        public decimal Saldo { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public TipoCuenta TipoCuenta { get; set; } 
+        public Cliente Titular { get; set; }
 
+        protected Cuenta() { }
+        protected Cuenta(Cliente titular, TipoCuenta tipo, decimal saldoInicial = 0)
+        {
+            IdCuenta = Guid.NewGuid();
+            Titular = titular;
+            TipoCuenta = tipo;
+            Saldo = saldoInicial;
+            FechaCreacion = DateTime.Now;
+        }
     }
 }

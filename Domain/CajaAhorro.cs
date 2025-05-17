@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Enum;
 
 namespace Domain
 {
@@ -14,10 +15,12 @@ namespace Domain
 
        public string Alias { get; set; }
 
-        public CajaAhorro()
+        public CajaAhorro() { }
+        public CajaAhorro(Cliente titular, string cbu, string cuit, decimal saldoInicial = 0)
+            : base(titular, TipoCuenta.CA, saldoInicial)
         {
-            idCuenta = Guid.NewGuid();
-            fechaCreacion = DateTime.Now;
+            CBU = cbu;
+            CUIT = cuit;
         }
     }
 }

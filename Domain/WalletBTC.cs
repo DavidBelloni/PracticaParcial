@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Enum;
 
 namespace Domain
 {
@@ -11,10 +12,11 @@ namespace Domain
         public string Direccion { get; set; }
         public string Tag { get; set; }
 
-        public WalletBTC()
+        public WalletBTC() { }
+        public WalletBTC(Cliente titular, string direccion, decimal saldoInicial = 0)
+            : base(titular, TipoCuenta.BTC, saldoInicial)
         {
-            this.idCuenta = Guid.NewGuid();
-            this.fechaCreacion = DateTime.Now;
-        }   
+            Direccion = direccion;
+        }
     }
 }

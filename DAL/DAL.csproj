@@ -42,10 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\FactoryDao.cs" />
-    <Compile Include="Implementation\Memory\OperacionesRepository.cs" />
+    <Compile Include="Factory\RepositoryFactory.cs" />
+    <Compile Include="Implementation\Memory\MemoryClienteRepository.cs" />
+    <Compile Include="Implementation\Memory\MemoryCuentaRepository.cs" />
+    <Compile Include="Implementation\Memory\MemoryOperacionRepository.cs" />
     <Compile Include="Implementation\SqlServer\OperacionesRepository.cs" />
-    <Compile Include="Interface\IOperacionesRepository.cs" />
+    <Compile Include="Interface\IClienteRepository.cs" />
+    <Compile Include="Interface\ICuentaRepository.cs" />
+    <Compile Include="Interface\IOperacionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
