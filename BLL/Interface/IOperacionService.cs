@@ -10,8 +10,6 @@ namespace BLL.Services
 {
    public interface IOperacionService 
     {
-        void RegistrarOperacion(Guid origenId, Guid destinoId, decimal monto, TipoOperacion tipo);
-        IEnumerable<Operacion> ListarOperacionesPorCuenta(Guid idCuenta);
-        IEnumerable<Operacion> ListarOperacionesPorCliente(Guid idCliente);
+        //void RegistrarOperacion(Guid origenId, Guid destinoId, decimal monto, TipoOperacion tipo);
     }
 }

@@ -13,10 +13,5 @@ namespace Domain
         public string Tag { get; set; }
 
         public WalletBTC() { }
-        public WalletBTC(Cliente titular, string direccion, decimal saldoInicial = 0)
-            : base(titular, TipoCuenta.BTC, saldoInicial)
-        {
-            Direccion = direccion;
-        }
     }
 }

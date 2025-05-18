@@ -10,8 +10,7 @@ namespace BLL.Interface
 {
     public interface IClienteService
     {
-        void RegistrarOperacion(Guid origenId, Guid destinoId, decimal monto, TipoOperacion tipo);
-        IEnumerable<Operacion> ListarOperacionesPorCuenta(Guid idCuenta);
-        IEnumerable<Operacion> ListarOperacionesPorCliente(Guid idCliente);
+        // Crear un nuevo Cliente
+        Cliente CrearCliente(string nombre);
     }
 }

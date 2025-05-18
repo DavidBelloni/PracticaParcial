@@ -21,25 +21,25 @@ namespace BLL.Services
         }
 
 
-        public void RegistrarOperacion(Guid origenId, Guid destinoId, decimal monto, TipoOperacion tipo)
-        {
-            var operacion = new Operacion
-            {
-                Origen = origenId,
-                Destino = destinoId,
-                Monto = monto,
-                TipoOperacion = tipo,
-                Fecha = DateTime.Now
-            };
-            _operacionRepo.Add(operacion);
-        }
+        //public void RegistrarOperacion(Guid origenId, Guid destinoId, decimal monto, TipoOperacion tipo)
+        //{
+        //    var operacion = new Operacion
+        //    {
+        //        Origen = origenId,
+        //        Destino = destinoId,
+        //        Monto = monto,
+        //        TipoOperacion = tipo,
+        //        Fecha = DateTime.Now
+        //    };
+        //    _operacionRepo.Add(operacion);
+        //}
 
-        public IEnumerable<Operacion> ListarOperacionesPorCuenta(Guid idCuenta)
-        {
-            return _operacionRepo.GetAll().Where(o =>
-                (o.OrigenId.HasValue && o.OrigenId.Value == idCuenta) ||
-                (o.DestinoId.HasValue && o.DestinoId.Value == idCuenta));
-        }
+        //public IEnumerable<Operacion> ListarOperacionesPorCuenta(Guid idCuenta)
+        //{
+        //    return _operacionRepo.GetAll().Where(o =>
+        //        (o.OrigenId.HasValue && o.OrigenId.Value == idCuenta) ||
+        //        (o.DestinoId.HasValue && o.DestinoId.Value == idCuenta));
+        //}
 
         public IEnumerable<Operacion> ListarOperacionesPorCliente(Guid idCliente)
         {

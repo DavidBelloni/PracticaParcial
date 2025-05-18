@@ -12,5 +12,11 @@ namespace Domain
         public string Nombre { get; set; }
         public List<Cuenta> Cuentas { get; set; } = new List<Cuenta>();
 
+
+        public Cliente()
+        {
+            IdCliente = Guid.NewGuid();
+        }
+
     }
 }

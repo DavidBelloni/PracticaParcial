@@ -9,12 +9,12 @@ using Domain;
 
 namespace DAL.Implementation.Memory
 {
-    public class MemoryOperacionRepository : IOperacionRepository
+    public class OperacionRepository : IOperacionRepository
     {
         #region singleton
 
         // Singleton Instance
-        private static MemoryOperacionRepository _instance;
+        private static OperacionRepository _instance;
 
         private static readonly object _lock = new object();
 
@@ -22,10 +22,10 @@ namespace DAL.Implementation.Memory
         private readonly List<Operacion> _operaciones = new List<Operacion>();
 
         // Constructor privado para evitar instanciación externa
-        private MemoryOperacionRepository() {}
+        private OperacionRepository() {}
 
         // Método para obtener la instancia única
-        public static MemoryOperacionRepository Instance
+        public static OperacionRepository Instance
         {
             get
             {
@@ -34,7 +34,7 @@ namespace DAL.Implementation.Memory
                     lock (_lock)
                     {
                         if (_instance == null)
-                            _instance = new MemoryOperacionRepository();
+                            _instance = new OperacionRepository();
                     }
                 }
                 return _instance;

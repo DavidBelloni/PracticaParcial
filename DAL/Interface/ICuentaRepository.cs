@@ -10,7 +10,6 @@ namespace DAL.Interface
     public interface ICuentaRepository
     {
         void Add(Cuenta cuenta);
-
         void Update(Cuenta cuenta);
         Cuenta GetById(Guid idCuenta);
         IEnumerable<Cuenta> GetAll();

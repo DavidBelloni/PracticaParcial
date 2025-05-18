@@ -16,11 +16,5 @@ namespace Domain
        public string Alias { get; set; }
 
         public CajaAhorro() { }
-        public CajaAhorro(Cliente titular, string cbu, string cuit, decimal saldoInicial = 0)
-            : base(titular, TipoCuenta.CA, saldoInicial)
-        {
-            CBU = cbu;
-            CUIT = cuit;
-        }
     }
 }

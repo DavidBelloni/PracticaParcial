@@ -22,11 +22,11 @@ namespace Domain
 
         public Operacion() { }
 
-        public Operacion(Guid origen, Guid destino, decimal montoOperacion, TipoOperacion tipo)
+        public Operacion(Cuenta origen, Cuenta destino, decimal monto, TipoOperacion tipo)
         {
             Origen = origen;
             Destino = destino;
-            Monto = montoOperacion;
+            Monto = monto;
             TipoOperacion = tipo;
             Fecha = DateTime.Now;
         }

@@ -20,7 +20,7 @@ namespace DAL.Factory
         public static ICuentaRepository CuentaRepository()
         {
             if (backendType == (int)BackendType.Memory)
-                return DAL.Implementation.Memory.MemoryCuentaRepository.Instance;
+                return DAL.Implementation.Memory.CuentaRepository.Instance;
             else
                 throw new Exception("PROBLEMAS");
         }
@@ -30,7 +30,7 @@ namespace DAL.Factory
         public static IClienteRepository ClienteRepository()
         {
             if (backendType == (int)BackendType.Memory)
-                return DAL.Implementation.Memory.MemoryClienteRepository.Instance;
+                return DAL.Implementation.Memory.ClienteRepository.Instance;
             else
                 throw new Exception("PROBLEMAS");
         }
@@ -39,7 +39,7 @@ namespace DAL.Factory
         public static IOperacionRepository OperacionRepository()
         {
             if (backendType == (int)BackendType.Memory)
-                return DAL.Implementation.Memory.MemoryOperacionRepository.Instance;
+                return DAL.Implementation.Memory.OperacionRepository.Instance;
            
             else
                 return DAL.Implementation.SqlServer.OperacionesRepository.Instance;

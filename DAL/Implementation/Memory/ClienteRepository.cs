@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Implementation.Memory
 {
-    public class MemoryClienteRepository : IClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         #region singleton
 
         // Singleton instance
-        private static MemoryClienteRepository _instance;
+        private static ClienteRepository _instance;
 
         private static readonly object _lock = new object();
 
@@ -21,9 +21,9 @@ namespace DAL.Implementation.Memory
         private readonly List<Cliente> _clientes = new List<Cliente>();
 
         // Constructor privado para evitar instanciación externa
-        private MemoryClienteRepository() {}
+        private ClienteRepository() {}
 
-        public static MemoryClienteRepository Instance
+        public static ClienteRepository Instance
         {
             get
             {
@@ -32,7 +32,7 @@ namespace DAL.Implementation.Memory
                     lock (_lock)
                     {
                         if (_instance == null)
-                            _instance = new MemoryClienteRepository();
+                            _instance = new ClienteRepository();
                     }
                 }
                 return _instance;

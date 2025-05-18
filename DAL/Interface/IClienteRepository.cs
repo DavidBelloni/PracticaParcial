@@ -10,7 +10,9 @@ namespace DAL.Interface
     public interface IClienteRepository
     {
         void Add(Cliente cliente);
+
         Cliente GetById(Guid idCliente);
+
         IEnumerable<Cliente> GetAll();
     }
 }

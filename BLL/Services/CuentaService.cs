@@ -14,7 +14,6 @@ namespace BLL.Services
     public  class CuentaService : ICuentaService
     {
         private readonly ICuentaRepository _cuentaRepo;
-        private readonly IOperacionService _operacionService;
 
         public CuentaService()
         {
@@ -22,56 +21,40 @@ namespace BLL.Services
             _cuentaRepo = RepositoryFactory.CuentaRepository();
         }
 
-
-        public void Depositar(Cuenta cuenta, decimal monto)
+        public void CrearCuenta(Cuenta cuenta, Cliente cliente)
         {
-            if (cuenta == null) throw new ArgumentNullException(nameof(cuenta));
-            if (monto <= 0) throw new ArgumentException("El monto debe ser positivo");
+            if (cuenta == null)
+                throw new ArgumentNullException(nameof(cuenta));
 
-            cuenta.Saldo += monto;
-            _cuentaRepo.Update(cuenta);
-            _operacionService.RegistrarOperacion(cuenta.IdCuenta, monto, TipoOperacion.Deposito);
+            if (cliente == null)
+                throw new ArgumentNullException(nameof(cliente));
+
+            // Asignar cliente como titular
+            cuenta.Titular = cliente;
+
+            // Validaciones según tipo de cuenta
+            if (cuenta is CajaAhorro ca)
+            {
+                if (string.IsNullOrWhiteSpace(ca.CUIT) || string.IsNullOrWhiteSpace(ca.CBU) || string.IsNullOrWhiteSpace(ca.Alias))
+                    throw new ArgumentException("CUIT, CBU y Alias son obligatorios para Caja de Ahorro.");
+
+                if (ca.Saldo < 0)
+                    throw new ArgumentException("El saldo no puede ser negativo.");
+            }
+            else if (cuenta is WalletBTC wbtc)
+            {
+                if (string.IsNullOrWhiteSpace(wbtc.Direccion))
+                    throw new ArgumentException("El Address es obligatorio para la Wallet BTC.");
+
+                if (wbtc.Saldo < 0)
+                    throw new ArgumentException("El saldo en BTC no puede ser negativo.");
+            }
+
+            // Guardar cuenta
+            _cuentaRepo.Add(cuenta);
+            Console.WriteLine($"[BLL] Cuenta creada con éxito para el cliente {cliente.Nombre}.");
+
         }
 
-        public void Extraer(Cuenta cuenta, decimal monto)
-        {
-            if (cuenta == null) throw new ArgumentNullException(nameof(cuenta));
-            if (monto <= 0) throw new ArgumentException("El monto debe ser positivo");
-            if (cuenta.saldo < monto) throw new InvalidOperationException("Saldo insuficiente");
-
-            cuenta.saldo -= monto;
-            _cuentaRepo.Update(cuenta);
-            _operacionService.RegistrarOperacion(cuenta.idCuenta, null, monto, TipoOperacion.Extraccion);
-        }
-
-        public void Transferir(Cuenta origen, Cuenta destino, decimal monto)
-        {
-            if (origen == null || destino == null)
-                throw new ArgumentNullException("Las cuentas no pueden ser nulas");
-            if (monto <= 0) throw new ArgumentException("El monto debe ser positivo");
-            if (origen.Saldo < monto) throw new InvalidOperationException("Saldo insuficiente en la cuenta origen.");
-
-            origen.Saldo -= monto;
-            destino.Ssaldo += monto;
-            _cuentaRepo.Update(origen);
-            _cuentaRepo.Update(destino);
-            _operacionService.RegistrarOperacion(origen.idCuenta, destino.idCuenta, monto, TipoOperacion.Transferencia);
-        }
-
-        public void ConvertirPesosABtc(CajaAhorro origenPesos, WalletBTC destinoBtc, decimal montoPesos)
-        {
-            if (origenPesos == null || destinoBtc == null)
-                throw new ArgumentNullException("Las cuentas no pueden ser nulas");
-            if (montoPesos <= 0) throw new ArgumentException("El monto debe ser positivo");
-            if (origenPesos.Saldo < montoPesos) throw new InvalidOperationException("Saldo insuficiente en la caja de ahorro.");
-
-            // Por simplicidad: 1 BTC = 1000 $
-            decimal montoBtc = montoPesos / 1000m;
-            origenPesos.Saldo -= montoPesos;
-            destinoBtc.Saldo += montoBtc;
-            _cuentaRepo.Update(origenPesos);
-            _cuentaRepo.Update(destinoBtc);
-            _operacionService.RegistrarOperacion(origenPesos.idCuenta, destinoBtc.idCuenta, montoPesos, TipoOperacion.Conversion);
-        }
     }
 }

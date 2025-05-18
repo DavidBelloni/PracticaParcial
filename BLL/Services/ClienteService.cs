@@ -1,4 +1,5 @@
-﻿using DAL.Factory;
+﻿using BLL.Interface;
+using DAL.Factory;
 using DAL.Interface;
 using Domain;
 using System;
@@ -9,33 +10,26 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ClienteService
+    public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepo;
-        private readonly ICuentaRepository _cuentaRepo;
 
         public ClienteService()
         {
             // Devuelve una instancia de la clase ClienteRepository
             _clienteRepo = RepositoryFactory.ClienteRepository();
-            _cuentaRepo = RepositoryFactory.CuentaRepository();
         }
 
         public Cliente CrearCliente(string nombre)
         {
             var cliente = new Cliente
             {
-                IdCliente = Guid.NewGuid(),
                 Nombre = nombre
             };
+
+            // Agregar el cliente a la base de datos
             _clienteRepo.Add(cliente);
             return cliente;
-        }
-
-
-        public IEnumerable<Cliente> ObtenerTodos()
-        {
-            return _clienteRepo.GetAll();
         }
 
     }

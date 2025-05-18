@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory\RepositoryFactory.cs" />
-    <Compile Include="Implementation\Memory\MemoryClienteRepository.cs" />
-    <Compile Include="Implementation\Memory\MemoryCuentaRepository.cs" />
-    <Compile Include="Implementation\Memory\MemoryOperacionRepository.cs" />
+    <Compile Include="Implementation\Memory\ClienteRepository.cs" />
+    <Compile Include="Implementation\Memory\CuentaRepository.cs" />
+    <Compile Include="Implementation\Memory\OperacionRepository.cs" />
     <Compile Include="Implementation\SqlServer\OperacionesRepository.cs" />
     <Compile Include="Interface\IClienteRepository.cs" />
     <Compile Include="Interface\ICuentaRepository.cs" />

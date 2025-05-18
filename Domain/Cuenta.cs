@@ -16,14 +16,11 @@ namespace Domain
         public TipoCuenta TipoCuenta { get; set; } 
         public Cliente Titular { get; set; }
 
-        protected Cuenta() { }
-        protected Cuenta(Cliente titular, TipoCuenta tipo, decimal saldoInicial = 0)
+        protected Cuenta() 
         {
             IdCuenta = Guid.NewGuid();
-            Titular = titular;
-            TipoCuenta = tipo;
-            Saldo = saldoInicial;
             FechaCreacion = DateTime.Now;
         }
+
     }
 }
