@@ -15,6 +15,11 @@ namespace Domain
 
        public string Alias { get; set; }
 
-        public CajaAhorro() { }
+        public CajaAhorro() 
+        {
+            Saldo = 0;
+            // CBU Generado Aleatoriamente
+            CBU = Guid.NewGuid().ToString().Substring(0, 10);
+        }
     }
 }

@@ -12,8 +12,8 @@ namespace BLL.Interface
     {
         // Crear Cuenta
         void CrearCuenta(Cuenta cuenta, Cliente cliente);
+        void Depositar(Cuenta cuenta, decimal monto);
 
-        //void Depositar(Cuenta cuenta, decimal monto);
         //void Extraer(Cuenta cuenta, decimal monto);
         //void Transferir(Cuenta origen, Cuenta destino, decimal monto);
         //void ConvertirPesosABtc(CajaAhorro origenPesos, WalletBTC destinoBtc, decimal montoPesos);

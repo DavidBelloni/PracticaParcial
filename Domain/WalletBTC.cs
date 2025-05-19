@@ -12,6 +12,11 @@ namespace Domain
         public string Direccion { get; set; }
         public string Tag { get; set; }
 
-        public WalletBTC() { }
+        public WalletBTC() 
+        {
+            Saldo = 0;
+            // Direccion Generada Aleatoriamente
+            Direccion = Guid.NewGuid().ToString().Substring(0, 20);
+        }
     }
 }

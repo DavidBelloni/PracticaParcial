@@ -52,9 +52,33 @@ namespace BLL.Services
 
             // Guardar cuenta
             _cuentaRepo.Add(cuenta);
-            Console.WriteLine($"[BLL] Cuenta creada con éxito para el cliente {cliente.Nombre}.");
+            //Console.WriteLine($"[BLL] Cuenta creada con éxito para el cliente {cliente.Nombre}.");
 
         }
+        public void Depositar(Cuenta cuenta, decimal monto)
+        {
+            if (cuenta == null)
+                throw new ArgumentNullException(nameof(cuenta));
+            if (monto <= 0)
+                throw new ArgumentException("El monto a depositar debe ser mayor que cero.");
+            
+            // Validar si la cuenta es de tipo CajaAhorro o WalletBTC
+            if (cuenta is CajaAhorro ca)
+            {
+                ca.Saldo += monto;
+                _cuentaRepo.Update(ca);
+            }
+            else if (cuenta is WalletBTC wbtc)
+            {
+                wbtc.Saldo += monto;
+                _cuentaRepo.Update(wbtc);
+            }
+            else
+            {
+                throw new InvalidOperationException("Tipo de cuenta no soportado.");
+            }
+            Console.WriteLine($"[BLL] Depósito realizado con éxito. Nuevo saldo: {cuenta.Saldo}.");
 
+        }
     }
 }
