@@ -11,6 +11,8 @@ namespace DAL.Interface
     {
         void Add(Cuenta cuenta);
         void Update(Cuenta cuenta);
+        Cuenta GetByCBU(string cbu);
+        Cuenta GetByTag(string tag);
         Cuenta GetById(Guid idCuenta);
         IEnumerable<Cuenta> GetAll();
         IEnumerable<Cuenta> GetByClienteId(Guid idCliente);

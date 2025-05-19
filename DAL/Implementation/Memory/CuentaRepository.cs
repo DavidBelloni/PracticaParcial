@@ -47,14 +47,42 @@ namespace DAL.Implementation.Memory
 
         public void Update(Cuenta cuenta)
         {
-            var existingCuenta = GetById(cuenta.IdCuenta);
-            if (existingCuenta != null)
+            if (cuenta == null)
+                throw new ArgumentNullException(nameof(cuenta));
+
+            // Buscar la cuenta existente por IdCuenta
+            var existente = _cuentas.FirstOrDefault(c => c.IdCuenta == cuenta.IdCuenta);
+
+            if (existente == null)
+                throw new InvalidOperationException("La cuenta no existe en el repositorio.");
+
+            // Actualizar propiedades principales
+            existente.Saldo = cuenta.Saldo;
+            //existente.Titular = cuenta.Titular;
+            //existente.FechaCreacion = cuenta.FechaCreacion;
+            //existente.TipoCuenta = cuenta.TipoCuenta;
+
+            // Actualizar propiedades específicas según el tipo
+            if (existente is CajaAhorro caExistente && cuenta is CajaAhorro caNueva)
             {
-                existingCuenta.Saldo = cuenta.Saldo;
-                existingCuenta.FechaCreacion = cuenta.FechaCreacion;
-                existingCuenta.TipoCuenta = cuenta.TipoCuenta;
-                existingCuenta.Titular = cuenta.Titular;
+                caExistente.CBU = caNueva.CBU;
+                caExistente.Alias = caNueva.Alias;
+                caExistente.CUIT = caNueva.CUIT;
             }
+            else if (existente is WalletBTC wbExistente && cuenta is WalletBTC wbNueva)
+            {
+                wbExistente.Direccion = wbNueva.Direccion;
+                wbExistente.Tag = wbNueva.Tag;
+            }
+        }
+        public Cuenta GetByCBU(string cbu)
+        {
+            return _cuentas.OfType<CajaAhorro>().FirstOrDefault(c => c.CBU == cbu);
+        }
+
+        public Cuenta GetByTag(string tag)
+        {
+            return _cuentas.OfType<WalletBTC>().FirstOrDefault(w => w.Tag == tag);
         }
 
         public Cuenta GetById(Guid idCuenta)

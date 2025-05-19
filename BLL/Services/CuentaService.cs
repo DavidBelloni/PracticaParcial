@@ -21,6 +21,16 @@ namespace BLL.Services
             _cuentaRepo = RepositoryFactory.CuentaRepository();
         }
 
+        public Cuenta BuscarPorCBU(string cbu)
+        {
+            return _cuentaRepo.GetByCBU(cbu);
+        }
+
+        public Cuenta BuscarPorTag(string tag) 
+        {
+            return _cuentaRepo.GetByTag(tag);
+        }
+
         public void CrearCuenta(Cuenta cuenta, Cliente cliente)
         {
             if (cuenta == null)

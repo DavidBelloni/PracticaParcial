@@ -19,7 +19,7 @@ namespace UI
             IClienteService clienteService = new ClienteService();
             ICuentaService cuentaService = new CuentaService();
             Cliente cliente = null;
-            //Cuenta cuentaDestino = null;
+            
 
             bool salir = false;
             while (!salir)
@@ -81,9 +81,15 @@ namespace UI
                         // Solicitar CBU o Dirección
                         if (tipoCuentaDestino == 0)
                         {
-                            var cuentaDestino = new CajaAhorro();
                             Console.WriteLine("Ingrese el CBU de la cuenta de destino:");
-                            cuentaDestino.CBU = Console.ReadLine();
+                            string cbu = Console.ReadLine();
+                            var cuentaDestino = cuentaService.BuscarPorCBU(cbu);
+
+                            if (cuentaDestino == null)
+                            {
+                                Console.WriteLine("Cuenta no encontrada.");
+                                continue;
+                            }
                             Console.WriteLine("Ingrese el monto a depositar: ");
                             decimal montoDeposito;
                             if (!decimal.TryParse(Console.ReadLine(), out montoDeposito) || montoDeposito <= 0)
@@ -93,13 +99,18 @@ namespace UI
                             }
                             cuentaService.Depositar(cuentaDestino, montoDeposito);
                             // Mensaje de exito
-                            Console.WriteLine($"Se han depositado {montoDeposito} en la cuenta de Caja de Ahorro con CBU: {cuentaDestino.CBU}");
+                            Console.WriteLine($"Se han depositado {montoDeposito} en la cuenta de Caja de Ahorro con CBU: {cbu}");
                         }
                         else
                         {
-                            var cuentaDestino = new WalletBTC();
                             Console.WriteLine("Ingrese el Tag de la Wallet BTC de destino:");
-                            cuentaDestino.Tag = Console.ReadLine();
+                            string tag = Console.ReadLine();
+                            var cuentaDestino = cuentaService.BuscarPorTag(tag);
+                            if (cuentaDestino == null)
+                            {
+                                Console.WriteLine("Wallet no encontrada.");
+                                continue;
+                            }
                             Console.WriteLine("Ingrese el monto a depositar: ");
                             decimal montoDeposito;
                             if (!decimal.TryParse(Console.ReadLine(), out montoDeposito) || montoDeposito <= 0)
@@ -108,8 +119,7 @@ namespace UI
                                 continue;
                             }
                             cuentaService.Depositar(cuentaDestino, montoDeposito);
-                            // Mensaje de exito
-                            Console.WriteLine($"Se han depositado {montoDeposito} en la Wallet BTC con dirección: {cuentaDestino.Direccion}");
+                            Console.WriteLine($"Se han depositado {montoDeposito} en la Wallet BTC con Tag: {tag}");
                         }
                         break;
                     case 4:

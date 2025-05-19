@@ -10,9 +10,11 @@ namespace BLL.Interface
 {
     public interface ICuentaService
     {
-        // Crear Cuenta
+        Cuenta BuscarPorCBU(string cbu);
+        Cuenta BuscarPorTag(string tag);
         void CrearCuenta(Cuenta cuenta, Cliente cliente);
         void Depositar(Cuenta cuenta, decimal monto);
+
 
         //void Extraer(Cuenta cuenta, decimal monto);
         //void Transferir(Cuenta origen, Cuenta destino, decimal monto);
